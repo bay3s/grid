@@ -1,4 +1,4 @@
-Implements the Gridworld environment for reinforcement learning - the environment allows an agent to navigate and collect rewards.
+Implements the Gridworld environment for reinforcement learning - an agent can navigate the grid, learn to collect rewards, and avoid obstacles.
 
 # Demo
 
@@ -35,7 +35,8 @@ for i in range(NUM_EPISODES):
 ```
 
 ### Action spaces:
-The action space format is the following:
+The actions that an agent is able to take in the environment are as follows:
+
   * 0 - step up
   * 1 - step down
   * 2 - step left
@@ -46,6 +47,8 @@ For each movement action, the agent takes one step in the said direction.
 ### Reward calculation
 
 Each step, the reward is calculated based on the "tile" on which the agent lands after taking an action.
+
+The rewards given for each action are based on the following criteria:
   * 0 - empty tile (one without fire / goal) 
   * 1 - goal
   * -1 - fire 
