@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from .element_type import ElementType
 
 
 @dataclass
@@ -13,7 +14,7 @@ class Element:
     intensity (float):
     channel (float):
     reward (float):
-    name (str):
+    type (ElementType):
   """
   x: float
   y: float
@@ -21,7 +22,7 @@ class Element:
   intensity: float
   channel: float
   reward: float
-  name: str
+  type: ElementType
   pass
 
 

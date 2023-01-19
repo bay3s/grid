@@ -14,10 +14,10 @@ def generate_element(coordinates: tuple, type: ElementType) -> Element:
   y = coordinates[1]
 
   if type == ElementType.HERO:
-    return Element(x, y, 1, 1, 2, None, 'hero')
+    return Element(x, y, 1, 1, 2, None, ElementType.HERO)
   elif type == ElementType.GOAL:
-    return Element(x, y, 1, 1, 1, 1, 'goal')
+    return Element(x, y, 1, 1, 1, 1, ElementType.GOAL)
   elif type == ElementType.FIRE:
-    return Element(x, y, 1, 1, 0, -1, 'fire')
+    return Element(x, y, 1, 1, 0, -1, ElementType.FIRE)
   else:
     raise ValueError

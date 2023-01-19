@@ -3,7 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import itertools
 import scipy.misc
-from .elements import ElementCollection, Element, ElementType, generate_element
+from src.elements import ElementCollection, ElementType, generate_element
+from PIL import Image
 
 
 @dataclass
@@ -13,16 +14,16 @@ class Grid:
 
   Args:
     size (int): Size of the Grid
+    partial (bool): Whether to display the partial grid.
     actions (int): Number of actions
     elements (list): Objects in the Grid
-    partial (bool): Whether to display the partial grid.
     state (np.ndarray): Current state of the environment.
   """
   size: int
-  actions: int
-  elements: ElementCollection
   partial: bool
-  state: np.ndarray
+  actions: int = 4
+  elements: ElementCollection = ElementCollection()
+  state: np.ndarray = None
 
   def __post_init__(self):
     a = self.reset()
@@ -102,7 +103,7 @@ class Grid:
     others = list()
 
     for obj in self.elements:
-      if obj.name == ElementType.HERO:
+      if obj.type == ElementType.HERO:
         hero = obj
       else:
         others.append(obj)
@@ -128,7 +129,7 @@ class Grid:
     :return: np.ndarray
     """
     dim_a = self.size + 2
-    a = np.ones([dim_a, dim_a])
+    a = np.ones([dim_a, dim_a, 3])
 
     a[1:-1, 1:-1, :] = 0
     hero = None
@@ -136,15 +137,15 @@ class Grid:
     for item in self.elements:
       a[item.y + 1:item.y + item.size + 1, item.x + 1:item.x + item.size + 1, item.channel] = item.intensity
 
-      if item.name == ElementType.HERO:
+      if item.type == ElementType.HERO:
         hero = item
 
     if self.partial:
       a = a[hero.y:hero.y + 3, hero.x:hero.x + 3, :]
 
-    b = scipy.misc.imresize(a[:, :, 0], [84, 84, 1], interp = 'nearest')
-    c = scipy.misc.imresize(a[:, :, 1], [84, 84, 1], interp = 'nearest')
-    d = scipy.misc.imresize(a[:, :, 2], [84, 84, 1], interp = 'nearest')
+    b = np.array(Image.fromarray(a[:, :, 0]).resize((84, 84), resample = Image.NEAREST))
+    c = np.array(Image.fromarray(a[:, :, 1]).resize((84, 84), resample = Image.NEAREST))
+    d = np.array(Image.fromarray(a[:, :, 2]).resize((84, 84), resample = Image.NEAREST))
     a = np.stack([b, c, d], axis = 2)
 
     return a
