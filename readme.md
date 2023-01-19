@@ -1,4 +1,6 @@
-Implements the Gridworld environment for reinforcement learning - an agent can navigate the grid, learn to collect rewards, and avoid obstacles.
+This repo implements a Gridworld environment that can be used to train Reinforcement Learning (RL) agents.
+
+An agent can navigate the grid, learn to collect rewards, and avoid obstacles.
 
 # Demo
 
