@@ -9,6 +9,12 @@ from PIL import Image
 
 @dataclass
 class Grid:
+
+  MOVE_DIRECTION_UP = 0
+  MOVE_DIRECTION_DOWN = 1
+  MOVE_DIRECTION_LEFT = 2
+  MOVE_DIRECTION_RIGHT = 3
+
   """
   Dataclass for observations made in the environment by the agent navigating it.
 
@@ -84,41 +90,41 @@ class Grid:
     """
     hero = self.elements[0]
 
-    if direction == 0 and hero.y >= 1:
+    if direction == self.MOVE_DIRECTION_UP and hero.y >= 1:
       hero.y -= 1
-
-    if direction == 1 and hero.y <= self.size - 2:
+    elif direction == self.MOVE_DIRECTION_DOWN and hero.y <= self.size - 2:
       hero.y += 1
-
-    if direction == 2 and hero.x >= 1:
+    elif direction == self.MOVE_DIRECTION_LEFT and hero.x >= 1:
       hero.x -= 1
-
-    if direction == 3 and hero.x <= self.size - 2:
+    elif direction == self.MOVE_DIRECTION_RIGHT and hero.x <= self.size - 2:
       hero.x += 1
 
     self.elements[0] = hero
     pass
 
   def check_goal(self) -> [float, bool]:
-    others = list()
+    other_elements = list() # these can only be goals or fire
 
     for obj in self.elements:
       if obj.type == ElementType.HERO:
         hero = obj
       else:
-        others.append(obj)
+        other_elements.append(obj)
 
-    for other in others:
+    for other in other_elements:
+      # check for element in the current position
       if hero.x != other.x or hero.y != other.y:
         continue
 
       self.elements.remove(other)
       if other.reward == 1:
         self.elements.append(generate_element(self._new_position(), ElementType.GOAL))
-      else:
+      elif other.reward == -1:
         self.elements.append(generate_element(self._new_position(), ElementType.FIRE))
+      else:
+        raise ValueError
 
-      return other.reward, False
+      return other.reward, True
 
     return 0.0, False
 
@@ -160,11 +166,9 @@ class Grid:
     """
     self.move_character(direction)
     reward, is_done = self.check_goal()
-
     state = self.render()
 
     if reward is None:
-      print(is_done, reward, state)
       return state, reward, is_done
-    else:
-      return state, reward, is_done
+
+    return state, reward, is_done
