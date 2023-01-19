@@ -2,7 +2,7 @@ Implements the Gridworld environment for reinforcement learning - the environmen
 
 # Demo
 
-<img src="https://raw.githubusercontent.com/bay3s/grid/main/gifs/episodes.gif">
+<img src="https://raw.githubusercontent.com/bay3s/grid/main/assets/episodes.gif" width='400'>
 
 #### Local installation
 
