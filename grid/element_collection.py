@@ -1,5 +1,5 @@
 import collections
-from .element import Element
+from grid.element import Element
 
 
 class ElementCollection(collections.MutableSequence):

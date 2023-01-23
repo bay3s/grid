@@ -2,9 +2,10 @@ from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
-from .elements import ElementCollection, ElementType, generate_element
+from grid.element_collection import ElementCollection
+from grid.element_type import ElementType
+from grid.utils import generate_element
 from PIL import Image
-
 
 @dataclass
 class Grid:

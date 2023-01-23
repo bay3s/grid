@@ -1,5 +1,5 @@
-from .element import Element
-from .element_type import ElementType
+from grid.element import Element
+from grid.element_type import ElementType
 
 def generate_element(coordinates: tuple, type: ElementType) -> Element:
   """

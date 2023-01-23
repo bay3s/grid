@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .element_type import ElementType
+from grid.element_type import ElementType
 
 
 @dataclass
