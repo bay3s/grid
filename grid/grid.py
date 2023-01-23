@@ -180,7 +180,7 @@ class Grid:
 
     :return: [np.ndarray, float, bool]
     """
-    self.move_character(direction)
+    self._move_character(direction)
     reward, is_done = self.check_goal()
     state = self.render()
 
