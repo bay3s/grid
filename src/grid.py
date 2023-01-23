@@ -2,8 +2,7 @@ from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
-import scipy.misc
-from src.elements import ElementCollection, ElementType, generate_element
+from .elements import ElementCollection, ElementType, generate_element
 from PIL import Image
 
 
