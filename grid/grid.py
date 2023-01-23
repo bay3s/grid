@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
+
 from grid.element_collection import ElementCollection
 from grid.element_type import ElementType
 from grid.utils import generate_element
@@ -35,6 +36,21 @@ class Grid:
     a = self.reset()
     plt.imshow(a, interpolation = 'nearest')
     pass
+
+  @property
+  def action_space(self) -> np.array:
+    """
+    Returns an array containing a possible actions in the action space of this environment.
+
+    Returns:
+      np.ndarray
+    """
+    return np.array([
+      self.MOVE_DIRECTION_UP,
+      self.MOVE_DIRECTION_DOWN,
+      self.MOVE_DIRECTION_LEFT,
+      self.MOVE_DIRECTION_RIGHT
+    ])
 
   def _new_position(self) -> [int , int]:
     """
@@ -80,7 +96,7 @@ class Grid:
 
     return self.state
 
-  def move_character(self, direction: int) -> None:
+  def _move_character(self, direction: int) -> None:
     """
     Given a direction to move in, move the hero in that direciton.
 
