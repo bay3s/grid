@@ -1,3 +1,3 @@
-from .src import Grid
+from .grid import Grid
 
 __all__ = ['Grid']

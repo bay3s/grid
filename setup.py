@@ -1,20 +1,14 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 with open('requirements.txt', 'r') as fh:
     requirements = fh.read()
 
 setup(
     name='grid',
-    description='Gridworld environment for Reinforcement Learning',
-    long_description='',
-    long_description_content_type='text/markdown',
-    url='https://github.com/iglu-contest/gridworld',
     author='bay3s',
-    include_package_data=True,
-    install_requires=requirements,
+    description='Gridworld environment for Reinforcement Learning',
+    license = 'Creative Commons Attribution-Noncommercial-Share ALike License',
+    packages = ['grid'],
     python_requires='>=3.7',
-    classifiers=[
-        'Programming Language :: Python :: 3',
-        'Operating System :: OS Independent',
-    ],
+    install_requires=requirements,
 )
